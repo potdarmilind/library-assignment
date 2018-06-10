@@ -1,0 +1,27 @@
+<?php
+ $title = 'Library';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ 
+ <table class="table">
+ <tr>
+     <th>Id</th>
+     <th>Name</th>
+     <th>Status</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($books as $book) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($book->id);?></td>
+     <td><?php echo $this->escapeHtml($book->name);?></td>
+     <td><?php echo ($this->escapeHtml($book->issued) == 1) ? 'Issued':'Available' ?></td>
+     <td>
+         <a href="<?php echo $this->url('library',
+             array('action'=>'issue', 'id' => $book->id));?>">Issue</a>
+         <a href="<?php echo $this->url('library',
+             array('action'=>'return', 'id' => $book->id));?>">Return</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
